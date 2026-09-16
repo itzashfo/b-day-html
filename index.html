@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Happy 17th Birthday, Jo ✦</title>
+<meta name="description" content="A cinematic birthday experience for Joanna Manuel.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- grain overlay, lives above everything -->
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- ambient particle canvas, sits behind all content -->
+<canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+<!-- custom cursor (desktop only) -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<!-- progress dots -->
+<nav class="progress-nav" aria-label="Section progress">
+  <button class="dot" data-target="opening" aria-label="Opening"></button>
+  <button class="dot" data-target="hero" aria-label="Hero"></button>
+  <button class="dot" data-target="message" aria-label="Message"></button>
+  <button class="dot" data-target="memories" aria-label="Memories"></button>
+  <button class="dot" data-target="seventeen" aria-label="Seventeen"></button>
+  <button class="dot" data-target="birthday-card" aria-label="Card"></button>
+  <button class="dot" data-target="finale" aria-label="Finale"></button>
+</nav>
+
+<!-- audio control -->
+<button class="audio-toggle" id="audioToggle" aria-label="Toggle music" aria-pressed="false">
+  <span class="audio-icon">♫</span>
+</button>
+
+<main>
+
+  <!-- ============ SCREEN 1: HEADPHONE PROMPT ============ -->
+  <section id="opening" class="screen opening-screen" aria-label="Opening">
+    <div class="opening-inner">
+      <div class="headphone-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 34V30C12 18.9543 20.9543 10 32 10C43.0457 10 52 18.9543 52 30V34" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <rect x="8" y="32" width="10" height="18" rx="5" stroke="currentColor" stroke-width="2.2"/>
+          <rect x="46" y="32" width="10" height="18" rx="5" stroke="currentColor" stroke-width="2.2"/>
+        </svg>
+      </div>
+      <p class="eyebrow-soft">🎧</p>
+      <h1 class="opening-title">Use headphones</h1>
+      <p class="opening-sub">For the best experience, put on your headphones.</p>
+      <p class="opening-sub opening-sub-2">The music is part of the experience.</p>
+      <button class="btn-glass" id="readyBtn">
+        <span>I'm ready</span>
+        <span class="btn-star">✦</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ SCREEN 2: READY / THRESHOLD ============ -->
+  <section id="threshold" class="screen threshold-screen" aria-label="Threshold" hidden>
+    <div class="threshold-inner">
+      <p class="threshold-line" data-line="1">Ready?</p>
+      <p class="threshold-line threshold-line-sub" data-line="2">Some experiences are better heard.</p>
+      <button class="btn-glass" id="enterBtn" hidden>
+        <span>Enter the experience</span>
+        <span class="btn-star">✦</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ CINEMATIC INTRO ============ -->
+  <section id="cinematic-intro" class="screen cinematic-screen" aria-label="Intro" hidden>
+    <div class="cinematic-text" id="cinematicText"></div>
+    <div class="reveal-stack" id="revealStack" hidden>
+      <p class="reveal-line reveal-happy">Happy Birthday</p>
+      <p class="reveal-line reveal-jo">Jo</p>
+      <p class="reveal-line reveal-17">17</p>
+    </div>
+  </section>
+
+  <!-- ============ HERO ============ -->
+  <section id="hero" class="screen hero-section" aria-label="Hero" hidden>
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Happy Birthday</p>
+      <h1 class="hero-jo">Jo</h1>
+      <p class="hero-17">17</p>
+      <div class="hero-meta">
+        <p class="hero-name">Joanna Manuel</p>
+        <p class="hero-date">17 • 09 • 2026</p>
+      </div>
+    </div>
+    <div class="scroll-invite">
+      <span>Scroll to continue</span>
+      <div class="scroll-line"><div class="scroll-dot"></div></div>
+    </div>
+  </section>
+
+  <!-- ============ MESSAGE ============ -->
+  <section id="message" class="content-section message-section" aria-label="A little something for you">
+    <div class="section-inner">
+      <h2 class="section-heading">A little something for you</h2>
+      <div class="message-body">
+        <p class="reveal-p">17 is one of those ages that feels like the beginning of something new.</p>
+        <p class="reveal-p">So here's to another year of memories, laughter, random conversations, unexpected moments, and all the little things that make life interesting.</p>
+        <p class="reveal-p">I hope 17 brings you plenty of reasons to smile, lots of good moments, and a year you'll look back on with a happy heart.</p>
+        <p class="reveal-p message-signoff">Happy Birthday, Jo. 🤍</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PHOTO GALLERY ============ -->
+  <section id="memories" class="content-section memories-section" aria-label="A few moments">
+    <div class="section-inner">
+      <h2 class="section-heading">A few moments</h2>
+      <p class="section-sub">Some memories deserve a little more time.</p>
+    </div>
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+  <!-- transition line -->
+  <section class="transition-lines" aria-hidden="true">
+    <p class="transition-line" data-line>Some moments pass quickly.</p>
+    <p class="transition-line" data-line>Some stay with us.</p>
+    <p class="transition-line" data-line>Here's to making more of them.</p>
+  </section>
+
+  <!-- ============ 17 SECTION ============ -->
+  <section id="seventeen" class="content-section seventeen-section" aria-label="Seventeen">
+    <button class="big-seventeen" id="bigSeventeen" aria-label="17, tap to celebrate">17</button>
+    <div class="seventeen-phrases">
+      <p class="phrase" data-line>A new chapter.</p>
+      <p class="phrase" data-line>More memories.</p>
+      <p class="phrase" data-line>More laughter.</p>
+      <p class="phrase" data-line>More adventures.</p>
+      <p class="phrase" data-line>More reasons to smile.</p>
+    </div>
+  </section>
+
+  <!-- ============ BIRTHDAY CARD ============ -->
+  <section id="birthday-card" class="content-section card-section" aria-label="Birthday card">
+    <div class="card-pre" id="cardPre">
+      <p class="card-teaser">There's one more thing…</p>
+      <button class="btn-glass" id="openCardBtn">
+        <span>Open it</span>
+        <span class="btn-star">✦</span>
+      </button>
+    </div>
+    <div class="card-wrap" id="cardWrap" hidden>
+      <div class="card" id="card">
+        <div class="card-cover">
+          <span class="card-star">✦</span>
+        </div>
+        <div class="card-inner">
+          <p class="card-headline">Happy 17th Birthday, Jo</p>
+          <p class="card-sub">Hope your 17th is one to remember. ✨</p>
+          <button class="btn-text" id="continueBtn">Continue ✦</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINALE ============ -->
+  <section id="finale" class="content-section finale-section" aria-label="Finale">
+    <div class="finale-inner">
+      <p class="finale-line finale-heres-to" data-line>Here's to 17.</p>
+      <div class="finale-phrases">
+        <p class="finale-phrase" data-line>More memories.</p>
+        <p class="finale-phrase" data-line>More laughter.</p>
+        <p class="finale-phrase" data-line>More adventures.</p>
+        <p class="finale-phrase" data-line>More reasons to smile.</p>
+      </div>
+      <p class="finale-happy" data-line>Happy Birthday, Jo</p>
+      <p class="finale-name" data-line>Joanna Manuel</p>
+      <p class="finale-date" data-line>17 • 09 • 2026</p>
+      <button class="btn-text replay-btn" id="replayBtn">Replay the experience</button>
+    </div>
+  </section>
+
+  <!-- hidden secret star, position set in JS/CSS -->
+  <button class="secret-star" id="secretStar" aria-label="A tiny secret">✦</button>
+
+</main>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
+  <div class="lightbox-stage">
+    <img id="lightboxImg" alt="">
+  </div>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">›</button>
+  <p class="lightbox-counter" id="lightboxCounter"></p>
+</div>
+
+<!-- ============ EASTER EGG OVERLAY ============ -->
+<div class="egg-overlay" id="eggOverlay" hidden>
+  <p class="egg-line" data-line>✨ You found the secret.</p>
+  <p class="egg-line" data-line>Okay, now go enjoy your birthday.</p>
+</div>
+
+<!-- audio element -->
+<audio id="bgMusic" preload="metadata" src="audio/birthday-remake.mp3"></audio>
+<p class="audio-fallback" id="audioFallback" hidden>Music couldn't be loaded, but the experience can continue.</p>
+
+<script src="script.js"></script>
+</body>
+</html>
