@@ -9,7 +9,7 @@ const birthdayConfig = {
   age: 17,
   birthday: "17 September 2026",
 
-  music: "audio/birthday-remake.mp3",
+  music: "b-day-html/A Dreamy Birthday.mp3",
 
   photos: [
     "images/jo01.jpg",
